@@ -1,0 +1,837 @@
+pr.1
+#include <stdio.h>
+
+struct STUDENT
+{
+    int roll_no;
+    char name[30];
+    int marks;
+};
+typedef struct STUDENT student;
+
+student s[100];  
+
+int accept(void);       
+void display(int n);
+
+int main()
+{
+    int n = 0, ch;
+
+    do {
+        printf("\n1. Enter the record");
+        printf("\n2. Display");
+        printf("\n3. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &ch);
+
+        switch (ch)
+        {
+            case 1:
+                n = accept();
+                break;
+
+            case 2:
+                display(n);
+                break;
+
+            case 3:
+                printf("\nThanks!\n");
+                break;
+
+            default:
+                printf("\nInvalid choice!\n");
+        }
+    } while (ch != 3);
+
+    return 0;
+}
+
+int accept(void)
+{
+    int n, i;
+    printf("\nEnter the number of students: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\nEnter record for student %d\n", i + 1);
+        printf("Roll No: ");
+        scanf("%d", &s[i].roll_no);
+
+        printf("Name: ");
+        scanf("%s", s[i].name);
+
+        printf("Marks: ");
+        scanf("%d", &s[i].marks);
+    }
+    return n;
+}
+
+void display(int n)
+{
+    int i;
+    if (n == 0)
+    {
+        printf("\nNo records to display!\n");
+        return;
+    }
+
+    printf("\n--- Student Records ---\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("[%d] Roll No: %d | Name: %s | Marks: %d\n",
+               i + 1, s[i].roll_no, s[i].name, s[i].marks);
+    }
+}
+
+
+
+
+
+
+#include <stdio.h>
+
+void linear(int a[], int n, int key)
+{
+    int i, flag = 0; 
+    for (i = 0; i < n; i++)
+    {
+        if (a[i] == key)
+        {
+            flag = 1;
+            break;
+        }
+    }
+
+    if (flag == 1)
+        printf("\nKey found at position %d\n", i + 1);
+    else
+        printf("\nKey not found\n");
+}
+
+int main()
+{
+    int a[10], n, key, i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter elements: ");
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    printf("Enter key to search: ");
+    scanf("%d", &key);
+
+    linear(a, n, key);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+
+int binary(int a[], int n, int key)
+{
+    int first = 0, last = n - 1, mid;
+
+    while (first <= last)
+    {
+        mid = (first + last) / 2;
+
+        if (a[mid] == key)
+            return mid;
+        else if (key > a[mid])
+            first = mid + 1;
+        else
+            last = mid - 1;
+    }
+
+    return -1;
+}
+
+int main()
+{
+    int n, key, i;
+    
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter %d sorted elements: ", n);
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    printf("Enter element to search: ");
+    scanf("%d", &key);
+
+    int result = binary(a, n, key);
+
+    if (result != -1)
+        printf("Element found at index %d\n", result);
+    else
+        printf("Element not found\n");
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>
+#define size 10
+struct STACK
+{
+ int s[size];
+ int top;
+};
+typedef struct STACK stack;
+stack st;
+int isfull();
+int isempty();
+void push();
+void pop();
+void display();
+void main()
+{
+ int ch;
+ st.top=-1;
+ 
+ 
+ do{
+ printf("\nMenu:\n1)PUSH\n2)POP\n3)DISPLAY\n4)EXIT");
+ printf("\nEnter your choice:");
+ scanf("\n%d",&ch);
+ switch(ch)
+ {
+ case 1:push();
+ break;
+ case 2:pop();
+ break;
+ case 3:display();
+ break;
+ case 4:break;
+ default:printf("Wrong choice!");
+ }
+ 
+ }while(ch!=4);
+}
+int isfull()
+{
+ if(st.top==size-1)
+ {
+ printf("\nThe stack is full.");
+ 
+ }
+ else
+ return(0);
+ 
+}
+int isempty()
+{
+ if(st.top==-1)
+ {
+ printf("\nThe stack is empty.");
+ 
+ }
+ else
+ return(0);
+}
+void push()
+{
+ int parcel;
+ if(st.top==size-1)
+ {
+ printf("\nStack is overflowed.");
+ }
+ else
+ {
+ st.top++;
+ printf("\nEnter the element:");
+ scanf("\n%d",&parcel);
+ st.s[st.top]=parcel;
+ }
+ 
+}
+void pop()
+{
+ int item;
+ if(st.top==-1)
+ {
+ printf("\nStack is underflowed.");
+ }
+ else
+ {
+ item=st.s[st.top];
+ printf("\n%dThe parcel removed is:",item);
+ st.top--;
+ }
+ 
+}
+void display()
+{
+ int i;
+ if(st.top==-1)
+ {
+ printf("\nStack is empty.");
+ 
+ }
+ 
+ else
+ {
+ for(i=st.top;i>=0;i--)
+ {
+ printf("\n%d",st.s[i]);
+ }
+ }
+}
+
+
+
+
+
+#include<stdio.h>#define size 10 
+struct QUEUE 
+{ 
+int s[size]; 
+int front,rear; 
+}; 
+typedef struct QUEUE queue; 
+queue q; 
+void enqueue(); 
+void dequeue(); 
+void display(); 
+void main() 
+{ 
+int ch; 
+do 
+{ 
+printf("\nMenu:\n1)Enqueue\n2)Dequeue\n3)Display\n4)Exit"); 
+printf("\nEnter your choice:"); 
+scanf("%d", &ch); 
+switch(ch) 
+{ 
+case 1:enqueue(); 
+break; 
+case 2:dequeue(); 
+break; 
+case 3:display(); 
+break; 
+case 4:break; 
+default:printf("\nWrong choice."); 
+} 
+}while(ch!=4); 
+} 
+void enqueue() 
+{ 
+int parcel; 
+if(q.rear==size-1) 
+{ 
+printf("\nQueue is overflowed."); 
+} 
+else 
+{ 
+printf("\nEnter the parcel:"); 
+scanf("%d",&parcel); 
+q.s[q.rear]=parcel; 
+q.rear++; 
+} 
+} 
+void dequeue() 
+{ 
+if(q.front>q.rear) 
+{ 
+printf("\nQueue is underflowed."); 
+} 
+else 
+{ 
+printf("\n%dDelivered parcel is:",q.s[q.front]); 
+q.front++; 
+} 
+} 
+void display() 
+{ 
+int i; 
+if(q.front>q.rear) 
+{ 
+printf("\nQueue is underflowed."); 
+} 
+else 
+{ 
+printf("\nQueue parcel is: "); 
+for(i=q.front;i<=q.rear;i++) 
+{ 
+printf("\n\t%d",q.s[i]); 
+} 
+} 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h> 
+#include<stdlib.h> 
+ 
+struct STACKLL { 
+    int data; 
+    struct STACKLL* next; 
+}; 
+typedef struct STACKLL stackll; 
+ 
+stackll* top = NULL;   
+ 
+ 
+void Push(); 
+void Pop(); 
+void Display(); 
+ 
+int main() 
+ { 
+  int ch; 
+  
+   
+  do 
+   { 
+    printf("\n**MENU" 
+    "\n1.Push" 
+    "\n2.Pop" 
+    "\n3.Display" 
+    "\n4.Exit"); 
+    printf("\nEnter your choice:"); 
+    scanf("%d",&ch); 
+    switch(ch) 
+     { 
+      case 1:Push(); 
+      break; 
+      case 2:Pop(); 
+      break; 
+      case 3:Display(); 
+      break; 
+      case 4:break; 
+      default:printf("Wrong choice"); 
+     } 
+   }while(ch!=4); 
+    
+   return 0; 
+} 
+void Push() 
+{ 
+    int element; 
+    printf("\n enter the element:"); 
+    scanf("%d",&element); 
+    stackll*temp=(stackll *)malloc (sizeof(stackll)); 
+    temp->data=element; 
+    temp->next=NULL; 
+    if (top==NULL) 
+    { 
+        top=temp; 
+    } 
+    else 
+    { 
+        temp->next=top; 
+        top=temp; 
+    } 
+} 
+void Pop() 
+{ 
+    if (top==NULL) 
+    { 
+        printf("\n stack is empty."); 
+    } 
+    else{ 
+        stackll* temp = top; 
+        printf("the %d element is popped",temp->data); 
+        top=temp->next; 
+        free(temp); 
+    } 
+} 
+ 
+void Display() 
+{ 
+    if (top==NULL) 
+    { 
+        printf("\n stack is empty."); 
+    } 
+    else{ 
+         stackll* temp = top; 
+        for(temp=top;temp!=NULL;temp=temp->next) 
+        { 
+            printf("\n%d",temp->data); 
+        } 
+    } 
+     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h> 
+#include <stdlib.h> 
+ 
+typedef struct SLL
+{     int data;    
+  struct SLL* next; 
+} sll; 
+ 
+sll* front = NULL;
+sll* rear = NULL; 
+ 
+void enqueue(int element)
+{     sll* temp = (sll*)malloc(sizeof(sll));    
+      temp->data = element;  
+      temp->next = NULL;   
+      if (rear == NULL) 
+      {       
+          front = rear = temp; 
+    }
+    else 
+    { 
+        rear->next = temp;    
+        rear = temp; 
+    } 
+} 
+ 
+void dequeue()
+{   
+    if (front == NULL)
+    {      
+        printf("Queue is empty\n"); 
+    } 
+    else 
+    {        
+        sll* temp = front; 
+        printf("The %d element dequeued\n", temp->data);  
+        front = front->next;       
+        if (front == NULL) 
+        {           
+            rear = NULL; 
+        } 
+        free(temp); 
+    } 
+} 
+ 
+void display() 
+{ 
+    if (front == NULL)
+    {        
+        printf("Queue is empty\n");  
+        } 
+        else
+        {      
+            sll* temp = front;   
+            while (temp != NULL) 
+            {           
+                printf("%d ", temp->data); 
+                temp = temp->next;
+            }
+         } 
+        printf("\n"); 
+    } 
+
+ 
+int main() 
+{ 
+    printf("Enqueueing 5 elements...\n");  
+    enqueue(10); 
+    enqueue(20); 
+    enqueue(30);    
+    enqueue(40);   
+    enqueue(50); 
+ 
+    printf("Queue elements: ");   
+    display(); 
+ 
+    printf("Dequeueing elements...\n");  
+    while (front != NULL) 
+    { 
+        dequeue(); 
+        printf("Queue elements after dequeue: "); 
+        display(); 
+    } 
+ 
+    return 0; 
+} \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct BSTREE
+{
+    int data;
+    struct BSTREE *lc, *rc;
+};
+typedef struct BSTREE bstree;
+
+bstree *root = NULL;
+
+// Function declarations
+bstree* create(bstree *root);
+bstree* insert(bstree *root, bstree *temp);
+void display(bstree *root);
+void inorder(bstree *root);
+void preorder(bstree *root);
+void postorder(bstree *root);
+void search(bstree *root, int key);
+
+int main()
+{
+    int ch, key;
+
+    do
+    {
+        printf("\n\n------ MENU ------");
+        printf("\n1) Create the tree");
+        printf("\n2) Display the tree");
+        printf("\n3) Search an element");
+        printf("\n4) Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &ch);
+
+        switch (ch)
+        {
+        case 1:
+            root = create(root);
+            break;
+        case 2:
+            display(root);
+            break;
+        case 3:
+            printf("\nEnter element to search: ");
+            scanf("%d", &key);
+            search(root, key);
+            break;
+        case 4:
+            printf("\nExiting program...\n");
+            break;
+        default:
+            printf("\nInvalid choice!");
+        }
+    } while (ch != 4);
+
+    return 0;
+}
+
+bstree* create(bstree *root)
+{
+    int i, n, d;
+    bstree *temp;
+    printf("\nEnter the number of nodes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        temp = (bstree*)malloc(sizeof(bstree));
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &d);
+        temp->data = d;
+        temp->lc = NULL;
+        temp->rc = NULL;
+
+        if (i == 0)
+            root = temp;
+        else
+            root = insert(root, temp);
+    }
+    return root;
+}
+
+// ✅ Missing function: BST insert logic
+bstree* insert(bstree *root, bstree *temp)
+{
+    if (root == NULL)
+        return temp;
+
+    if (temp->data < root->data)
+        root->lc = insert(root->lc, temp);
+    else if (temp->data > root->data)
+        root->rc = insert(root->rc, temp);
+    // Duplicate values ignored (optional handling)
+    return root;
+}
+
+void display(bstree *root)
+{
+    if (root == NULL)
+    {
+        printf("\nTree is empty.");
+        return;
+    }
+    printf("\nInorder traversal : ");
+    inorder(root);
+    printf("\nPreorder traversal : ");
+    preorder(root);
+    printf("\nPostorder traversal: ");
+    postorder(root);
+    printf("\n");
+}
+
+void inorder(bstree *temp)
+{
+    if (temp != NULL)
+    {
+        inorder(temp->lc);
+        printf("%d ", temp->data);
+        inorder(temp->rc);
+    }
+}
+
+void preorder(bstree *temp)
+{
+    if (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        preorder(temp->lc);
+        preorder(temp->rc);
+    }
+}
+
+void postorder(bstree *temp)
+{
+    if (temp != NULL)
+    {
+        postorder(temp->lc);
+        postorder(temp->rc);
+        printf("%d ", temp->data);
+    }
+}
+
+void search(bstree *root, int key)
+{
+    bstree *temp = root;
+    int flag = 0;
+
+    if (root == NULL)
+    {
+        printf("\nTree is empty.");
+        return;
+    }
+
+    while (temp != NULL)
+    {
+        if (key == temp->data)
+        {
+            printf("\nElement %d found in the tree.", key);
+            flag = 1;
+            break;
+        }
+        else if (key < temp->data)
+            temp = temp->lc;
+        else
+            temp = temp->rc;
+    }
+
+    if (flag == 0)
+        printf("\nElement %d not found in the tree.", key);
+}
+
